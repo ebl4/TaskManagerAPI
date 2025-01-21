@@ -8,6 +8,15 @@
 2. Navegue até o diretório do projeto:
 ```cd TaskManagerAPI```
 
+2.1. Crie o banco de dados a partir do EF Core
+
+```dotnet tool install --global dotnet-ef```
+```dotnet add package Microsoft.EntityFrameworkCore.Design```
+```dotnet ef migrations add InitialCreate```
+```dotnet ef database update```
+
+ou
+
 3. Construa e rode os containers Docker:
 ```docker-compose up --build```
 

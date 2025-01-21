@@ -1,0 +1,7 @@
+# Ignore os arquivos do visual studio
+.vs
+.vscode
+
+# Ignore os arquivos de compilação
+.bin
+.obj

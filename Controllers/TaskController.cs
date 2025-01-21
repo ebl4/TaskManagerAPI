@@ -1,43 +1,31 @@
 // Controllers/TaskController.cs
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using TaskManagerAPI.Services.Interface;
 
 [Route("api/[controller]")]
 [ApiController]
 public class TaskController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly ITaskService _taskService;
 
-    public TaskController(ApplicationDbContext context)
+    public TaskController(ITaskService taskService)
     {
-        _context = context;
+        _taskService = taskService;
     }
 
     // POST: api/Task
     [HttpPost]
     public async Task<IActionResult> CreateTask([FromBody] Task task)
     {
-        var project = await _context.Projects.FindAsync(task.ProjectId);
-        if (project == null)
-        {
-            return NotFound();
-        }
-
-        if (project.Tasks.Count >= 20)
-        {
-            return BadRequest("Limite de tarefas por projeto atingido.");
-        }
-
-        _context.Tasks.Add(task);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetTasks), new { id = task.Id }, task);
+        var createdTask = await _taskService.CreateTaskAsync(task);
+        return CreatedAtAction(nameof(GetTasks), new { id = createdTask.Id }, createdTask);
     }
 
     // GET: api/Task
     [HttpGet]
     public async Task<IActionResult> GetTasks(int projectId)
     {
-        var tasks = await _context.Tasks.Where(t => t.ProjectId == projectId).ToListAsync();
+        var tasks = await _taskService.GetTasksByProjectAsync(projectId);
         return Ok(tasks);
     }
 
@@ -45,28 +33,22 @@ public class TaskController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> UpdateTask(int id, [FromBody] Task task)
     {
-        var existingTask = await _context.Tasks.FindAsync(id);
-        if (existingTask == null)
+        var existingTask = await _taskService.UpdateTaskAsync(id, task);
+        return Ok(existingTask);
+    }
+
+    // DELETE: api/Task/5
+    [HttpDelete]
+    public async Task<IActionResult> DeleteTask(int id)
+    {
+        try
         {
-            return NotFound();
+            await _taskService.DeleteTaskAsync(id);
+            return NoContent();
         }
-
-        existingTask.Status = task.Status;
-        existingTask.Description = task.Description;
-
-        // Add task update to history
-        var history = new TaskHistory
+        catch (InvalidOperationException ex)
         {
-            FieldModified = "Status/Description",
-            OldValue = existingTask.Status + "/" + existingTask.Description,
-            NewValue = task.Status + "/" + task.Description,
-            ModifiedDate = DateTime.UtcNow,
-            ModifiedBy = "System",
-            TaskId = id
-        };
-        _context.TaskHistories.Add(history);
-
-        await _context.SaveChangesAsync();
-        return NoContent();
+            return BadRequest(ex.Message);
+        }
     }
 }

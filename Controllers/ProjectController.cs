@@ -1,23 +1,23 @@
 // Controllers/ProjectController.cs
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using TaskManagerAPI.Services.Interface;
 
 [Route("api/[controller]")]
 [ApiController]
 public class ProjectController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
+    private readonly IProjectService _projectService;
 
-    public ProjectController(ApplicationDbContext context)
+    public ProjectController(IProjectService projectService)
     {
-        _context = context;
+        _projectService = projectService;
     }
 
     // GET: api/Project
     [HttpGet]
     public async Task<IActionResult> GetProjects()
     {
-        var projects = await _context.Projects.ToListAsync();
+        var projects = await _projectService.GetProjectsAsync();
         return Ok(projects);
     }
 
@@ -25,44 +25,21 @@ public class ProjectController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateProject([FromBody] Project project)
     {
-        _context.Projects.Add(project);
-        await _context.SaveChangesAsync();
-        return CreatedAtAction(nameof(GetProjects), new { id = project.Id }, project);
-    }
-
-    // PUT action
-    [HttpPut("{id}")]
-    public async Task<IActionResult> Update(int id, [FromBody] Project project)
-    {
-        if (id != project.Id) return BadRequest();
-
-        var existingProj = await _context.Projects.SingleOrDefaultAsync(c => c.Id == id);
-
-        if (existingProj is not null)
-        {
-            existingProj.Id = project.Id;
-            existingProj.Name = project.Name;
-            existingProj.Tasks = project.Tasks;
-            await _context.SaveChangesAsync();
-            return Ok(existingProj);
-        }
-
-        return NoContent();
+        var newProject = await _projectService.CreateProjectAsync(project);
+        return CreatedAtAction(nameof(GetProjects), new { id = newProject.Id }, newProject);
     }
 
     [HttpDelete]
     public async Task<IActionResult> DeleteProject(int id)
     {
-        var existingProject = await _context.Projects.SingleOrDefaultAsync(m => m.Id == id);
-
-        if (existingProject is not null)
+        try
         {
-            _context.Remove(existingProject);
-            await _context.SaveChangesAsync();
-            return base.Ok(existingProject);
+            await _projectService.DeleteProjectAsync(id);
+            return NoContent();
+        } 
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
         }
-        
-        return NotFound();
     }
-
 }
