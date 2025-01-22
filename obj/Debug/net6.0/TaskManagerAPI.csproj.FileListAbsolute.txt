@@ -68,3 +68,8 @@ C:\Projetos\TaskManagerAPI\obj\Debug\net6.0\refint\TaskManagerAPI.dll
 C:\Projetos\TaskManagerAPI\obj\Debug\net6.0\TaskManagerAPI.pdb
 C:\Projetos\TaskManagerAPI\obj\Debug\net6.0\TaskManagerAPI.genruntimeconfig.cache
 C:\Projetos\TaskManagerAPI\obj\Debug\net6.0\ref\TaskManagerAPI.dll
+C:\Projetos\TaskManagerAPI\obj\Debug\net6.0\staticwebassets\msbuild.TaskManagerAPI.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Projetos\TaskManagerAPI\obj\Debug\net6.0\staticwebassets\msbuild.build.TaskManagerAPI.props
+C:\Projetos\TaskManagerAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.TaskManagerAPI.props
+C:\Projetos\TaskManagerAPI\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.TaskManagerAPI.props
+C:\Projetos\TaskManagerAPI\obj\Debug\net6.0\staticwebassets.pack.json

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "n6Jp8ZuDqfKBpjhBivdip6IKFv81sSH7NMd8UZNq3jgX6phSwRZCxC3Fyp+f/jwzCSZEY8DwvwxBRNqdF/NSKA==",
+  "dgSpecHash": "ifjVwXOeB0HO5C8UiZJKHVdTgnMflxxfbgH7IXyBXwcDDE+EXUY0QRFDjUQU4yKvtIU3xjC+pvPJh9Kmx7849g==",
   "success": true,
   "projectFilePath": "C:\\Projetos\\TaskManagerAPI\\TaskManagerAPI.csproj",
   "expectedPackageFiles": [
@@ -143,7 +143,11 @@
     "C:\\Users\\Edson\\.nuget\\packages\\xunit.assert\\2.4.1\\xunit.assert.2.4.1.nupkg.sha512",
     "C:\\Users\\Edson\\.nuget\\packages\\xunit.core\\2.4.1\\xunit.core.2.4.1.nupkg.sha512",
     "C:\\Users\\Edson\\.nuget\\packages\\xunit.extensibility.core\\2.4.1\\xunit.extensibility.core.2.4.1.nupkg.sha512",
-    "C:\\Users\\Edson\\.nuget\\packages\\xunit.extensibility.execution\\2.4.1\\xunit.extensibility.execution.2.4.1.nupkg.sha512"
+    "C:\\Users\\Edson\\.nuget\\packages\\xunit.extensibility.execution\\2.4.1\\xunit.extensibility.execution.2.4.1.nupkg.sha512",
+    "C:\\Users\\Edson\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.16\\microsoft.netcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\Edson\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.16\\microsoft.windowsdesktop.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\Edson\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.16\\microsoft.aspnetcore.app.ref.6.0.16.nupkg.sha512",
+    "C:\\Users\\Edson\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.16\\microsoft.netcore.app.host.win-x64.6.0.16.nupkg.sha512"
   ],
   "logs": []
 }
