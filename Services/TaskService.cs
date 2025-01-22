@@ -43,7 +43,7 @@ namespace TaskManagerAPI.Services
             if (project == null)
                 throw new KeyNotFoundException("Projeto não encontrado.");
 
-            return project.Tasks.ToList();
+            return project.Tasks!.ToList();
         }
 
         public async Task<Task> UpdateTaskAsync(int id, Task updatedTask)

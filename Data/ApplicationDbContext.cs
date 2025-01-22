@@ -6,9 +6,11 @@ public class ApplicationDbContext : DbContext
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options) { }
 
-    public DbSet<Project> Projects { get; set; }
-    public DbSet<Task> Tasks { get; set; }
-    public DbSet<TaskHistory> TaskHistories { get; set; }
+    protected ApplicationDbContext() { }
+
+    public virtual DbSet<Project> Projects { get; set; }
+    public virtual DbSet<Task> Tasks { get; set; }
+    public virtual DbSet<TaskHistory> TaskHistories { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

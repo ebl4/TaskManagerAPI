@@ -38,7 +38,7 @@ namespace TaskManagerAPI.Services
         {
             var existingProject = await GetProjectByIdAsync(id);
 
-            if (existingProject.Tasks.Any(t => t.Status != "Concluída"))
+            if (existingProject.Tasks!.Any(t => t.Status != "Concluída"))
                 throw new InvalidOperationException("Não é possível remover um projeto com tarefas pendentes.");
 
             _context.Projects.Remove(existingProject);

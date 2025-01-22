@@ -5,10 +5,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["TaskManagerAPI/TaskManagerAPI.csproj", "TaskManagerAPI/"]
+COPY ["TaskManagerAPI.csproj", "TaskManagerAPI/"]
 RUN dotnet restore "TaskManagerAPI/TaskManagerAPI.csproj"
-COPY . .
 WORKDIR "/src/TaskManagerAPI"
+COPY . .
 RUN dotnet build "TaskManagerAPI.csproj" -c Release -o /app/build
 
 FROM build AS publish
